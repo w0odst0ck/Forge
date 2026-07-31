@@ -7,6 +7,14 @@ set -euo pipefail
 
 FORGE_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 ATLAS_DIR="${ATLAS_DIR:-$FORGE_ROOT/../Atlas}"   # 可用环境变量覆盖
+LOCK_FILE="${LOCK_FILE:-/tmp/run_match.lock}"
+
+# 并发互斥锁：防止多实例同时操作 Atlas git 状态（stash/commit/push）
+exec 9>"$LOCK_FILE"
+if ! flock -n 9; then
+  echo "❌ 已有 run_match.sh 在运行（$LOCK_FILE），退出" >&2
+  exit 1
+fi
 
 BOM="${1:-$FORGE_ROOT/engine/examples/bom_sample.toml}"
 shift || true
@@ -52,8 +60,8 @@ mkdir -p "$OUT_DIR"
 
 echo "=== [4/4] 报告回传 Atlas ==="
 ATLAS_COMMIT="$(git -C "$ATLAS_DIR" rev-parse --short HEAD 2>/dev/null || echo unknown)"
-REPORT_FILE="$(ls -t "$OUT_DIR"/*_match_report.md 2>/dev/null | head -1 || true)"
-if [[ -n "$REPORT_FILE" ]]; then
+REPORT_FILE="$OUT_DIR/bom_match_report.md"  # 引擎固定输出名
+if [[ -f "$REPORT_FILE" ]]; then
   # 溯源：报告头标注场景库 commit
   if ! grep -q "scene-library commit" "$REPORT_FILE"; then
     sed -i "1i > 溯源: Atlas scene-library @ \`$ATLAS_COMMIT\`（run_match.sh 自动生成）\n" "$REPORT_FILE"
@@ -62,7 +70,10 @@ if [[ -n "$REPORT_FILE" ]]; then
 fi
 
 if [[ -d "$ATLAS_DIR/.git" ]]; then
-  git -C "$ATLAS_DIR" add reports/ 2>/dev/null || true
+  # 只 add 本次生成的报告，避免误提交 reports/ 下无关文件
+  if [[ -n "$REPORT_FILE" ]]; then
+    git -C "$ATLAS_DIR" add -- "$REPORT_FILE" 2>/dev/null || true
+  fi
   if ! git -C "$ATLAS_DIR" diff --cached --quiet; then
     git -C "$ATLAS_DIR" commit -m "report: BOM 场景匹配报告（scene-library@$ATLAS_COMMIT）"
     git -C "$ATLAS_DIR" pull --rebase && git -C "$ATLAS_DIR" push
