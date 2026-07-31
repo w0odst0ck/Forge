@@ -1,0 +1,96 @@
+# ============================================================
+# BOM 样本：智能 IoT 雷达感应灯管
+# 来源：文无提供的完整规格表
+# 品类：led_linear_tube
+# ============================================================
+
+[product]
+name = "智能IoT雷达感应灯管"
+schema_id = "led_linear_tube"
+description = "1.2米线性灯管，集成雷达感应+物联网通信+智能调光，免布线安装，工业级"
+
+[product.product_specs]
+voltage = "AC220V"
+color = "白色"
+length = 1.2
+length_unit = "m"
+
+[product.product_specs.power]
+nominal = 12
+range_min = 1
+range_max = 12
+unit = "W"
+
+[product.product_specs.cct]
+min = 6000
+max = 6500
+unit = "K"
+
+[product.product_specs.efficacy]
+value = 180
+unit = "LM/W"
+
+# ── 光源模组 ──
+
+[product.light_module]
+led_type = "SMD3030"
+led_qty = 96
+lens = "PC扩散透镜"
+
+# ── 电源模组 ──
+
+[product.power_module]
+type = "dimmable"
+
+[product.power_module.dimming_range]
+min = 0
+max = 100
+
+# ── 传感模组 ──
+
+[product.sensor_module]
+type = "radar_5.8G"
+sensitivity_adjustable = true
+
+# ── 通信模组 ──
+
+[product.communication_module]
+uplink = ["4G", "5G", "ethernet", "wi-fi"]
+downlink = ["rs-485", "rs-232", "lora", "zigbee", "ethernet"]
+
+[product.communication_module.protocols]
+industrial = ["modbus", "opc_ua", "siemens_plc", "mitsubishi_plc"]
+
+[product.communication_module.protocols.distance]
+min = 100
+max = 200
+unit = "m"
+
+# ── 控制模组 ──
+
+[product.control_module]
+features = [
+    "iot_address_code",
+    "dimming_0_100pct",
+    "sleep_dimming_0_100pct",
+    "on_off_speed_adjustable",
+    "gradual_on_off",
+    "zone_grouping",
+    "neighbor_group_config",
+    "neighbor_notification",
+    "hold_time_adjustable",
+    "dual_end_sleep",
+    "sensor_group_linking",
+]
+no_neutral_wire = true
+encryption = true
+
+# ── 环境适应性 ──
+
+[product.environment.temp_range]
+min = -40
+max = 75
+unit = "C"
+
+[product.environment]
+ip_ratings = ["IP30", "IP40", "IP67"]

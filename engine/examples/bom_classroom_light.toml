@@ -1,0 +1,101 @@
+# ============================================================
+# BOM 样本：智能 LED 教室灯（600×600 面板）
+# 来源：政府采购招标规格 + 智能化改造方案
+# 品类：led_panel_light
+# 核心：健康合规（RG0/频闪/Ra90/CCC）+ 智能化（恒照度/课表/分区）
+# ============================================================
+
+[product]
+name = "智能LED教室灯（600×600）"
+schema_id = "led_panel_light"
+description = "教室照明改造专用：无频闪调光驱动，存在型雷达，恒照度控制，通过CCC认证"
+
+[product.product_specs]
+voltage = "AC220V"
+form_factor = "600x600"
+ra = 95
+r9 = 92
+luminance_uniformity = 0.85
+upward_flux_ratio = 12
+up_down_cct_diff = 45
+redundancy_ratio = 4.0
+
+[product.product_specs.power]
+nominal = 36
+tolerance = 2
+unit = "W"
+
+[product.product_specs.efficacy]
+value = 95
+unit = "LM/W"
+
+[product.product_specs.cct]
+min = 4800
+max = 5200
+unit = "K"
+
+# ── 光源模组 ──
+
+[product.light_module]
+led_type = "SMD2835"
+lens = "微晶扩散板"
+anti_glare = "微晶防眩"
+integrated = true
+
+# ── 电源模组 ──
+
+[product.power_module]
+type = "flicker_free_dimmable"
+dimming_levels = 4
+
+[product.power_module.dimming_range]
+min = 10
+max = 100
+
+# ── 传感模组 ──
+
+[product.sensor_module]
+type = "radar_5.8G"
+presence_type = "existence"
+light_sensor = true
+sensitivity_adjustable = true
+
+# ── 通信模组 ──
+
+[product.communication_module]
+uplink = ["wi-fi", "ethernet"]
+downlink = ["rs-485", "lora", "zigbee"]
+
+[product.communication_module.protocols]
+industrial = ["modbus", "opc_ua"]
+
+# ── 控制模组 ──
+
+[product.control_module]
+features = [
+    "dimming_0_100pct",
+    "gradual_on_off",
+    "zone_grouping",
+    "schedule_link",
+    "scene_modes",
+    "hold_time_adjustable",
+]
+encryption = true
+
+# ── 认证 ──
+
+[product.certification]
+ccc = true
+blue_light_rating = "RG0"
+flicker_rating = "无显著影响"
+report_available = true
+
+# ── 环境适应性 ──
+
+[product.environment.temp_range]
+min = -10
+max = 45
+unit = "C"
+
+[product.environment]
+ip_ratings = ["IP40", "IP42"]
