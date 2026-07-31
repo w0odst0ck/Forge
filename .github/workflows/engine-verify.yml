@@ -1,0 +1,47 @@
+name: Engine Verify
+
+on:
+  push:
+    paths:
+      - 'engine/**'
+  pull_request:
+    paths:
+      - 'engine/**'
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install deps
+        working-directory: engine
+        run: |
+          pip install pydantic click tomli-w
+
+      - name: Verify with bundled example
+        working-directory: engine
+        run: |
+          python -m src.cli match examples/bom_sample.toml --output-dir /tmp/verify
+
+      - name: Verify with classroom example
+        working-directory: engine
+        run: |
+          python -m src.cli match examples/bom_classroom_light.toml --output-dir /tmp/verify2
+
+      - name: Syntax check
+        working-directory: engine
+        run: |
+          python -m py_compile src/*.py
+
+      - name: Upload report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: match-reports
+          path: /tmp/verify/*.md
