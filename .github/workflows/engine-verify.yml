@@ -4,9 +4,13 @@ on:
   push:
     paths:
       - 'engine/**'
+      - 'scripts/**'
+      - '.github/**'
   pull_request:
     paths:
       - 'engine/**'
+      - 'scripts/**'
+      - '.github/**'
   workflow_dispatch:
 
 jobs:
