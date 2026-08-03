@@ -11,3 +11,6 @@ build/
 # 仿真输出不入库（成品报告回传 solution-vault/reports/）
 output/
 logs/
+
+# Node 依赖不入库
+node_modules/
