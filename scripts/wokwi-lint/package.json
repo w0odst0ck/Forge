@@ -1,0 +1,12 @@
+{
+  "name": "wokwi-lint",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Wokwi diagram.json 预验证（Forge W1 学习包质量门禁）",
+  "scripts": {
+    "lint": "node lint.js"
+  },
+  "dependencies": {
+    "@wokwi/diagram-lint": "^0.1.1"
+  }
+}

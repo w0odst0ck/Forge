@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "author": "w0odst0ck",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": 0, "left": 0, "attrs": {} }
+  ],
+  "connections": [
+    [ "esp:TX2", "esp:RX2", "blue", [ "v-20", "h-80", "v-20" ] ]
+  ]
+}

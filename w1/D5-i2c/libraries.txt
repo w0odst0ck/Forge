@@ -1,0 +1,3 @@
+Adafruit MPU6050 Library
+Adafruit Unified Sensor
+Adafruit BusIO

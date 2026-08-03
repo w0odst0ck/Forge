@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "author": "w0odst0ck",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-pushbutton", "id": "btn1", "top": -90, "left": 140, "attrs": { "color": "red" } }
+  ],
+  "connections": [
+    [ "esp:D4", "btn1:1.l", "green", [ "v-40", "h-30" ] ],
+    [ "btn1:2.l", "esp:GND.1", "black", [ "v-70", "h-80" ] ]
+  ]
+}
