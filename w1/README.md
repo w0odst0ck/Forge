@@ -37,7 +37,8 @@ graph LR
 1. 打开对应 D 目录的 `README.md`（目标 + 步骤 + 概念速记 + 面试题 + 组合挑战）
 2. Wokwi 粘贴 `sketch.ino` + `diagram.json`（+ `libraries.txt`），点 ▶ 跑通
 3. 验证标准打勾；面试题口头答一遍
-4. 完成状态告诉 Agent → 更新本表
+4. 飞轮收尾：读 `understand.md` → 写「我的理解」3 句到 `notes/Dn.md` → 概念卡复制进 `study-cards.md` → 填架构图空格
+5. 完成状态告诉 Agent → 更新本表看板 + 同步（协议见 `../Atlas/COLLAB.md`）
 
 ## 学习飞轮（跑通代码之后）
 

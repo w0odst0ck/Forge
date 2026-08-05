@@ -2,7 +2,7 @@
 
 > 定位：W1-W4 学习的"架构认知骨架"。先看懂全局，再每完成一个 D 填一格。
 > 演进规则：🟡 = 留白待填（对应学习任务）｜✅ = 已填
-> 配套：`../README.md` 学习飞轮｜`ADR.md` 设计决策记录
+> 配套：`../README.md` 学习飞轮｜`ADR.md` 设计决策记录｜课纲 `../../../Atlas/plan/courses.md`｜计划源 `../../../Atlas/tech-plans/4week-awakening.md`
 
 ## 一、五层架构总图
 
