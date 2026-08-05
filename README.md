@@ -18,7 +18,7 @@
 | 类别 | 位置 | 说明 |
 |------|------|------|
 | 🧰 工程代码 | `engine/` `scripts/` | BOM 引擎 + 工具脚本 |
-| 📚 学习材料 | `w1/` | W1 训练包（D1-D7 + 架构 + 概念卡） |
+| 🔬 实验代码 | `labs/` | 学习实验代码（W1：`labs/w1/`，指引在 Atlas/learning/w1/） |
 | 📝 项目记录 | `memory/` | 项目日志 |
 
 ## 目录结构
@@ -26,7 +26,7 @@
 ```
 Forge/
 ├── engine/           # BOM 场景匹配引擎（解析/匹配/渲染/CLI）
-├── w1/               # W1 嵌入式唤醒训练包（任务表/进度看板：w1/README.md）
+├── labs/             # 学习实验代码（labs/w1/ = W1 的 sketch.ino + diagram.json）
 ├── scripts/          # 工具脚本（run_match / verify_engine / verify-links / wokwi-lint）
 ├── memory/           # 项目日志
 └── README.md
