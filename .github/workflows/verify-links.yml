@@ -1,0 +1,41 @@
+name: Verify Links
+
+on:
+  push:
+    paths:
+      - 'README.md'
+      - 'w1/**'
+      - 'scripts/**'
+      - '.github/**'
+  pull_request:
+    paths:
+      - 'README.md'
+      - 'w1/**'
+      - 'scripts/**'
+      - '.github/**'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify-links:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: Forge   # 与互链约定 ../Forge 一致
+
+      - uses: actions/checkout@v4
+        with:
+          repository: w0odst0ck/Atlas
+          path: Atlas   # 必须与 verify-links.sh 的 ../Atlas 相对约定一致
+
+      - name: Run verify-links
+        run: |
+          chmod +x forge/scripts/verify-links.sh
+          ATLAS_ROOT="$GITHUB_WORKSPACE/atlas" forge/scripts/verify-links.sh

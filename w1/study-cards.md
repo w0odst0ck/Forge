@@ -23,9 +23,23 @@ domain: embedded-basics
 
 ---
 
-<!-- 每完成一个 D，把 understand.md 第 5 节概念卡复制到下面 -->
+## D2 · 按键中断与防抖
 
-## D2 · 按键中断与防抖（待完成）
+```yaml
+---
+tags: [w1, interrupt, isr, volatile, debounce]
+domain: embedded-basics
+---
+# 按键中断与防抖
+- **定义**：硬件事件（下降沿）打断主循环执行 ISR；防抖用时间戳过滤机械抖动
+- **本质**：事件驱动 vs 轮询；ISR=生产者、loop=消费者
+- **易错点**：① ISR 必须短（禁 delay/print，会卡死+看门狗复位）② ISR 共享变量必须 volatile（防编译器缓存优化）③ 防抖用时间戳非阻塞，不用 delay ④ ESP32 ISR 加 IRAM_ATTR（防 Flash 访问冲突）
+- **架构位置**：感知层输入 + 事件驱动处理
+```
+
+---
+
+<!-- 每完成一个 D，把 understand.md 第 5 节概念卡复制到下面 -->
 
 ## D3 · PWM 调光（待完成）
 

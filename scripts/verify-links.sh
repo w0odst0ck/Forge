@@ -6,7 +6,7 @@
 set -euo pipefail
 
 FORGE_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
-ATLAS_ROOT="$FORGE_ROOT/../Atlas"
+ATLAS_ROOT="${ATLAS_ROOT:-$FORGE_ROOT/../Atlas}"  # CI 可用环境变量覆盖（checkout 到别的路径）
 
 fail=0
 
